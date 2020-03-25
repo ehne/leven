@@ -13,7 +13,7 @@
 ## About
 It basically just changes a variable in a class every time the `update()` method is called. It lets you create pretty complex animations using the animation dictionary system.
 
-## Useage
+## Usage
   * copy `leven.py` into your working folder. 
   * import it in your main python file. 
   * create a new tweener
