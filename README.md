@@ -75,7 +75,7 @@ steps:
     def coolNewAnimationType(x):
       return x + x*x
     ```
-  *  add the animation to the animation types dictionary:
+  * add the animation to the animation types dictionary:
     ```python
     leven.f["coole"] = cooleNewAnimationType
     ```
