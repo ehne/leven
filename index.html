@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.rawgit.com/kimeiga/bahunya/css/bahunya-0.1.3.css"
+    />
+    <link rel="stylesheet" href="prism.css">
+  </head>
+  <body>
+    <header>
+        <p>
+            <img alt="logo" src="logo.svg" align="center" />
+        </p>
+    </header>
+    <main>
+      <article>
+        
+
+        <p>
+          <img
+            alt="Version"
+            src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000"
+          />
+          <a
+            href="#"
+            target="https://github.com/ehne/leven/blob/master/LICENSE.md"
+          >
+            <img
+              alt="License: ISC"
+              src="https://img.shields.io/github/license/ehne/leven"
+            />
+          </a>
+          <a href="https://raw.githubusercontent.com/ehne/leven/master/leven.py">
+              <img src="https://img.shields.io/badge/download-leven.py-blue" alt="download leven.py">
+          </a>
+          <a href="https://github.com/ehne/leven">
+            <img alt="GitHub stars" src="https://img.shields.io/github/stars/ehne/leven?style=social">
+          </a>
+        </p>
+
+        <blockquote>
+          <p>A simple python tweening library, for making little animations.</p>
+        </blockquote>
+
+        <h2 id="about">About</h2>
+
+        <p>
+          It basically just changes a variable in a class every time the
+          <code>update()</code> method is called. It lets you create pretty
+          complex animations using the animation dictionary system.
+        </p>
+
+        <h2 id="usage">Usage</h2>
+
+        <ul>
+          <li>copy <code>leven.py</code> into your working folder.</li>
+
+          <li>import it in your main python file.</li>
+
+          <li>create a new tweener</li>
+
+          <li>"start" the tweener</li>
+
+          <li>update the tweener every tick/frame/second/whatever</li>
+        </ul>
+
+        <p>Example:</p>
+
+        <pre><code class="python language-python">
+import leven
+class AnyClass:
+  def __init__(self):
+    self.valueToAdjust = 0
+
+    self.animation = leven.Tweener({ # creates a new tweener
+      "start":{ # the animation name
+        "v":["valueToAdjust"], # the (v)aules to adjust
+        "sv":[0], # the (s)tart (v)alues
+        "ev":[100], # the (e)nd (v)alues
+        "a":["linear"], # the "(a)nimation" types
+        "t": 60, # the "(t)ime" to run it for
+        "-&gt;":"end" # the next animation
+      }
+    }, self) # !! very important
+    self.animation.start() # "starts" the animation
+  def update(self):
+    self.animation.update() # goes through all of the animations
+...
+</code></pre>
+
+        <h2 id="theanimationdictionarysystem">
+          The Animation Dictionary System
+        </h2>
+
+        <p>
+          all animations/tweens leven uses are created through an "animation
+          dictionary". Which is just a big dictionary that contains the
+          animation settings. The basic form of these dictionaries is as
+          follows:
+        </p>
+
+        <pre><code class="python language-python">{
+  "animation name":{
+    "v": ["values", "to", "adjust"],
+    "sv": [0,0,0],
+    "ev": [500,10,400],
+    "a": ["linear","linear","linear"],
+    "t": 60,
+    "-&gt;": "end"
+  }
+}
+</code></pre>
+
+        <p>
+          All animation dictionaries need to have a "start" animation, and a
+          "->" value that is "end". This means that you can create complex
+          animations that have multiple steps relatively easily.
+        </p>
+
+        <h2 id="theanimationtypes">The animation types</h2>
+
+        <p>
+          Leven has a bunch of animation types built in, and adding your own is
+          very easy.
+        </p>
+
+        <ul>
+          <li>
+            <code>linear / linearout</code>: a simple linear animation from 0%
+            to 100%.
+          </li>
+
+          <li><code>quad / quadout</code>: a quadratic animation.</li>
+
+          <li><code>cuibc / cubicout</code>: a cubic animation.</li>
+
+          <li><code>quint / quintout</code>: a quintic animation.</li>
+        </ul>
+
+        <p>
+          <img
+            alt="animation types gif"
+            src="animationTypes.gif"
+            align="center"
+          />
+        </p>
+
+        <blockquote>
+          <p>
+            Note: all animations have a "out" variant, this is where it goes
+            from the end value ("ev") to the start value ("sv"), this is usefull
+            when you want to go from a large number to a small number, as python
+            range does not support going in reverse very easily. So a simple
+            work around is this "out" system.
+          </p>
+        </blockquote>
+
+        <h2 id="addingyourownanimationtype">Adding your own animation type</h2>
+
+        <p>steps:</p>
+
+        <ul>
+          <li>
+            make a function that takes a number as an argument, and returns
+            another number:
+            <br>
+            <code class="language-python"> def coolNewAnimationType(x): return x + x*x </code>
+          </li>
+
+          <li>
+            add the animation to the animation types dictionary:
+            <code class="language-python"> leven.f["coole"] = cooleNewAnimationType </code>
+          </li>
+
+          <li>
+            great! you can now use the animation in your animation dictionaries:
+            <pre>
+                <code class="language-python"
+                >
+"start":{ 
+    "v": ["valueToAdjust"],
+    "sv": [0], 
+    "ev": [500],
+    "a": ["coole"], 
+    "t": 60, 
+    "->": "end" }</code>
+            </pre>
+            
+          </li>
+        </ul>
+
+        <h2 id="generatearrayhelperfunction">generateArray helper function</h2>
+
+        <p>a function that generates a tweened array/list of values</p>
+
+        <pre><code class="python language-python">tweenedList = leven.generateArray(0, 100, elemNo=10, function="linear")
+# returns [0,10,20,30,40,50,60,70,80,90,100]
+</code></pre>
+<h2 id="showyoursupport">Show your support</h2>
+
+        <p>Give a ⭐️ if this project helped you!</p>
+      </article>
+    </main>
+
+    <footer>
+
+        <p>created by<strong> Darcy Lugt-Falk </strong> in <strong>2020</strong></p>
+     <p>Website: <a href="https://darcylf.me">darcylf.me</a></p>
+        <p>Github: <a href="https://github.com/ehne">@ehne</a></p>
+        
+
+        <hr />
+
+        <p><em>Flower by iconsphere from the Noun Project</em></p>
+    </footer>
+    <script src="prism.js"></script>
+
+  </body>
+</html>
