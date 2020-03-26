@@ -1,3 +1,6 @@
+<p>
+  <img alt="logo" src="logo.png" align="center"/>
+</p>
 <h1 align="center">
   Welcome to Leven 👋
 </h1>
@@ -66,6 +69,10 @@ Leven has a bunch of animation types built in, and adding your own is very easy.
   * `quad / quadout`: a quadratic animation.
   * `cuibc / cubicout`: a cubic animation.
   * `quint / quintout`: a quintic animation.
+<p>
+  <img alt="animation types gif" src="animationTypes.gif" align="center"/>
+</p>
+
 > Note: all animations have a "out" variant, this is where it goes from the end value ("ev") to the start value ("sv"), this is usefull when you want to go from a large number to a small number, as python range does not support going in reverse very easily. So a simple work around is this "out" system.
 
 ## Adding your own animation type
@@ -111,3 +118,5 @@ Give a ⭐️ if this project helped you!
 
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+
+_Flower by iconsphere from the Noun Project_
