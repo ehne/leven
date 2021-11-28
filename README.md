@@ -107,9 +107,6 @@ tweenedList = leven.generateArray(0, 100, elemNo=10, function="linear")
 
 ## Author
 
-👤 **Darcy Lugt-Falk**
-
-* Website: [darcylf.me](https://darcylf.me)
 * Github: [@ehne](https://github.com/ehne)
 
 ## Show your support
